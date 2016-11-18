@@ -1,0 +1,26 @@
+{
+  "name": "tryton-session-llt",
+  "description": "Tryton Session with a long lifetime",
+  "version": "4.0.0",
+  "license": "GPL-3.0+",
+  "author": "Coopengo <support@coopengo.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/coopengo/tryton-session-llt.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "beautify": "js-beautify --config .jsbeautifyrc -r *.js tests/*.js tests/.*.js",
+    "lint": "jshint -c .jshintrc *.js tests/*.js tests/.*.js",
+    "test": "tap tests/*"
+  },
+  "dependencies": {
+    "inherits": "^2.0.3",
+    "tryton-session": "~4.0.0"
+  },
+  "devDependencies": {
+    "co": "^4.6.0",
+    "lodash": "^4.17.2",
+    "tap": "^8.0.0"
+  }
+}
