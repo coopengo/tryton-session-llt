@@ -4,10 +4,11 @@ var co = require('co');
 var Session = require('..');
 var data = require('./.data');
 //
-var session = new Session(data.server, data.database, data.username, data.password);
+var session = new Session(data.server, data.database);
+var modules;
 
 function start() {
-  return session.start();
+  return session.start(data.username, data.password);
 }
 
 function action() {
@@ -16,6 +17,12 @@ function action() {
       [], 0, null, null, ['name']
     ]);
     t.ok(_.isArray(mods));
+    if (modules) {
+      t.equal(modules, mods.length);
+    }
+    else {
+      modules = mods.length;
+    }
   });
 }
 
