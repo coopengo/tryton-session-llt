@@ -15,9 +15,10 @@ SessionLLT.afterUnpack = Session.afterUnpack;
 SessionLLT.serializable.password = true;
 //
 SessionLLT.prototype.start = function (username, password) {
+  var res = SessionLLT.super_.prototype.start.call(this, username, password);
   this.username = username;
   this.password = password;
-  return SessionLLT.super_.prototype.start.call(this, username, password);
+  return res;
 };
 SessionLLT.prototype.rpc = function () {
   return new Promise((resolve, reject) => {
@@ -28,7 +29,7 @@ SessionLLT.prototype.rpc = function () {
             this.login(this.username, this.password)
               .then(() => SessionLLT.super_.prototype.rpc.apply(this,
                   arguments)
-                .then(resolve, reject));
+                .then(resolve, reject), reject);
           }
           else {
             reject(err);
@@ -45,7 +46,7 @@ SessionLLT.prototype.bulk = function () {
             this.login(this.username, this.password)
               .then(() => SessionLLT.super_.prototype.bulk.apply(this,
                   arguments)
-                .then(resolve, reject));
+                .then(resolve, reject), reject);
           }
           else {
             reject(err);
