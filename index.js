@@ -12,12 +12,15 @@ SessionLLT.beforeStop = Session.beforeStop;
 SessionLLT.beforePack = Session.beforePack;
 SessionLLT.afterUnpack = Session.afterUnpack;
 //
-SessionLLT.serializable.password = true;
+SessionLLT.serializable.parameters = true;
+SessionLLT.serializable.language = true;
 //
-SessionLLT.prototype.start = function (username, password) {
-  var res = SessionLLT.super_.prototype.start.call(this, username, password);
+SessionLLT.prototype.start = function (username, parameters, language) {
+  var res = SessionLLT.super_.prototype.start.call(this, username, parameters,
+    language);
   this.username = username;
-  this.password = password;
+  this.parameters = parameters;
+  this.language = language;
   return res;
 };
 SessionLLT.prototype.rpc = function () {
@@ -26,7 +29,7 @@ SessionLLT.prototype.rpc = function () {
       .then(
         (res) => resolve(res), (err) => {
           if (err.status === 403) {
-            this.login(this.username, this.password)
+            this.login(this.username, this.parameters, this.language)
               .then(() => SessionLLT.super_.prototype.rpc.apply(this,
                   arguments)
                 .then(resolve, reject), reject);
@@ -43,7 +46,7 @@ SessionLLT.prototype.bulk = function () {
       .then(
         (res) => resolve(res), (err) => {
           if (err.status === 403) {
-            this.login(this.username, this.password)
+            this.login(this.username, this.parameters, this.language)
               .then(() => SessionLLT.super_.prototype.bulk.apply(this,
                   arguments)
                 .then(resolve, reject), reject);
