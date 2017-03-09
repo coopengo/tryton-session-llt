@@ -28,7 +28,7 @@ SessionLLT.prototype.rpc = function () {
     SessionLLT.super_.prototype.rpc.apply(this, arguments)
       .then(
         (res) => resolve(res), (err) => {
-          if (err.status === 403) {
+          if (Session.isRPCForbidden(err)) {
             this.login(this.username, this.parameters, this.language)
               .then(() => SessionLLT.super_.prototype.rpc.apply(this,
                   arguments)
@@ -45,7 +45,7 @@ SessionLLT.prototype.bulk = function () {
     SessionLLT.super_.prototype.bulk.apply(this, arguments)
       .then(
         (res) => resolve(res), (err) => {
-          if (err.status === 403) {
+          if (Session.isRPCForbidden(err)) {
             this.login(this.username, this.parameters, this.language)
               .then(() => SessionLLT.super_.prototype.bulk.apply(this,
                   arguments)
