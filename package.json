@@ -1,7 +1,7 @@
 {
   "name": "tryton-session-llt",
   "description": "Tryton Session with a long lifetime",
-  "version": "4.2.1",
+  "version": "4.2.2",
   "license": "GPL-3.0+",
   "author": "Coopengo <support@coopengo.com>",
   "repository": {
