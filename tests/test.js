@@ -5,6 +5,7 @@ var Session = require('..')
 var data = require('./.data')
 
 var session = new Session(data.server, data.database)
+var raw
 var modules
 
 function start () {
@@ -25,6 +26,17 @@ function action () {
   })
 }
 
+function pack () {
+  return session.pack().then((res) => { raw = res })
+}
+
+function unpack () {
+  return Session.unpack(raw).then((res) => {
+    t.isA(res, Session)
+    session = res
+  })
+}
+
 function breakToken () {
   session.token = '123'
 }
@@ -33,6 +45,9 @@ function stop () {
   return session.stop()
 }
 t.test(start)
+  .then(action)
+  .then(pack)
+  .then(unpack)
   .then(action)
   .then(breakToken)
   .then(action)
