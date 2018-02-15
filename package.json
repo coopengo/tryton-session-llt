@@ -13,13 +13,11 @@
     "test": "standard && tap tests/*"
   },
   "dependencies": {
-    "inherits": "^2",
-    "tryton-session": "~4.6"
+    "inherits": "^2"
   },
   "devDependencies": {
-    "co": "^4",
     "lodash": "^4",
     "standard": "latest",
-    "tap": "^8"
+    "tap": "latest"
   }
 }
