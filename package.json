@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "inherits": "^2",
-    "tryton-session": "~4.6"
+    "tryton-session": "~4.8.1"
   },
   "devDependencies": {
     "lodash": "^4",
